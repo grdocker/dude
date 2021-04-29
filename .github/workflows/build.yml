@@ -8,3 +8,27 @@ jobs:
     steps:
       - name: Build docker image
         uses: docker/build-push-action@v2
+  lint_source:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          pip3 install -r requirements.txt
+
+      - name: Check formatting
+        run: |
+          black --check ./dude
+
+      - name: Check styleguide
+        run: |
+          flake8 ./dude
+
+      - name: Lint
+        run: |
+          pylint ./dude
