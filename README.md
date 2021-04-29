@@ -1,3 +1,5 @@
-# template
+# DUDE
+DUDE allows operate docker-compose over http api.
 
-This repository contains basic files needed to setup new image repository with tests and auto uploads
+# Name
+DUDE is a corporation manufacturering power tools and heavy machinery in Grand Theft Auto: Vice City and Grand Theft Auto: San Andreas
