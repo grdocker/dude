@@ -1,0 +1,10 @@
+name: Build docker image
+on:
+  push:
+    branches-ignore: [main]
+jobs:
+  build_image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build docker image
+        uses: docker/build-push-action@v2
