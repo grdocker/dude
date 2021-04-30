@@ -4,7 +4,7 @@ Module with redeploy handle implementation
 import compose.config
 from compose.project import Project, ConvergenceStrategy
 from docker import APIClient
-from flask import request
+from flask import request, current_app as app
 from .auth import auth_protected
 from .config import DOCKER_URL, SERVICES_DIR
 
@@ -18,7 +18,8 @@ def _load_compose_config(service):
         return compose.config.load(
             compose.config.find(SERVICES_DIR, [f"{service}.yml"], None)
         )
-    except compose.config.ConfigurationError:
+    except compose.config.ConfigurationError as ex:
+        app.logger.error("load config error: %s", str(ex))
         return None
 
 
