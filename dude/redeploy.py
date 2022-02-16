@@ -6,11 +6,11 @@ from compose.project import Project, ConvergenceStrategy
 from docker import APIClient
 from flask import request, current_app as app
 from .auth import auth_protected
-from .config import DOCKER_URL, SERVICES_DIR
+from .config import DOCKER_URL, DOCKER_TLS, SERVICES_DIR
 
 
 def _make_docker_client():
-    return APIClient(base_url=DOCKER_URL)
+    return APIClient(base_url=DOCKER_URL, tls=DOCKER_TLS)
 
 
 def _load_compose_config(service):
