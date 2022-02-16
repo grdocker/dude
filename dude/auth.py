@@ -1,18 +1,22 @@
 """
 Module for app authorization
 """
+from logging import getLogger
 from flask import Blueprint, request
 from github import Github, BadCredentialsException
 from .config import ALLOWED_GITHUB_USERS
 
 auth_protected = Blueprint("auth_protected", __name__)
+logger = getLogger("gunicorn.access")
 
 
 def _unauthorized(reason):
+    logger.info("unathorized: %s", reason)
     return reason, 401
 
 
 def _forbidden(reason):
+    logger.info("forbidden: %s", reason)
     return reason, 403
 
 
@@ -25,6 +29,9 @@ def _authorize_user(token):
         return None
     except BadCredentialsException as ex:
         return _unauthorized(ex.data)
+    except Exception as ex:
+        logger.info("auth exception: %s", str(ex))
+        raise
 
 
 @auth_protected.before_request
