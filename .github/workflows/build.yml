@@ -27,7 +27,7 @@ jobs:
 
       - name: Check styleguide
         run: |
-          flake8 ./dude
+          flake8 --max-line-length=100 ./dude
 
       - name: Lint
         run: |
