@@ -6,4 +6,4 @@ RUN pip3 install -r /tmp/requirements.txt
 COPY dude /app/dude
 WORKDIR /app
 
-CMD [ "gunicorn", "-b", "0.0.0.0:8000", "-w", "2", "dude:app" ]
+CMD [ "gunicorn", "-b", "0.0.0.0:8000", "--access-logfile", "-", "-w", "2", "dude:app" ]
